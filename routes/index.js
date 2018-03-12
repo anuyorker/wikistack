@@ -1,14 +1,15 @@
 'use strict'
 const express = require('express');
 const router = express.Router();
-
+const {wikiRouter} = require('./wiki');
+const {userRouter} = require('./user');
 const Client = require('pg').Client;
 
-module.exports = io => {
+router.use('/wiki', wikiRouter);
+router.use('/user', userRouter);
 
-  router.get('/', (req, res, next) => {
-    res.render('index');
-  });
+router.get('/', (req, res, next) => {
+  res.render('index');
+});
 
-  return router;
-};
+module.exports = {router};
